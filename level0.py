@@ -4,8 +4,9 @@ from engine.level import *
 from engine.game import *
 from engine.canvas import *
 from engine.rectangle import *
-from random import randint
+from engine.animation import *
 
+from enemies.enemy1 import enemy1
 
 
 def tick(deltaTime): #Stuff that happens every frame
@@ -50,20 +51,8 @@ def tick(deltaTime): #Stuff that happens every frame
         player.setFlipX(False) #face left
 
 
-
     #ENEMY AI
-    if player in level0.rayCast(enemy1Weapon.getPosition(), enemy1Weapon.getAngle()): #If the enemy is in range of the player
-        if enemy1.getUserData()[1] == 0: #If the attack timer = 0, as in he is ready to shoot
-           if randint(1,4) == 1: #1 in 4 change to hit
-               playerHealth = playerHealth - 5
-        enemy1.setUserData([getUserData()[0],100])
-    else: #can't see player
-       if player.getPosition().getX() < enemy1.getPostition().getX(): #If player is on left of enemy
-           if enemy1.getVelocity().getX() > -5:
-               enemy1.setVelocity(enemy1.getVelocity().add(Vector(-1, 0)))
-       else: #player is on the right of the enemy
-           if enemy1.getVelocity().getX() < 5:
-               enemy1.setVelocity(player.getVelocity().add(Vector(1, 0)))
+    enemy1()
     #MEDKIT
     if player in regionTest(Rectangle(medkit1.getPosition().getX(),medkit1.getPosition().getY(),100, 100)):
         medkit1.kill
@@ -90,6 +79,7 @@ def level0(game):
     playerHealth= 100
     gun = Entity()
 
+
     level0 = Level()
     level0.setGravity(Vector(0, 2))
     level0.setDrag(0.9)
@@ -102,6 +92,7 @@ def level0(game):
     enemy1.setUserData([10, 0]) #Health, attack timer
     player.addChild(gun)
     enemy1.addChild(enemy1Weapon)
+    level0.setBackground(game.getAsset(map2.png))
 
     #Platforms
     level0.addCollider(Rectangle(84, 266, 77, 25))
@@ -115,3 +106,6 @@ def level0(game):
 
 
     level0.addCollider(Rectangle(0, 340, 3499, 10)) #Ground
+
+    #Animations
+    enemyWalking = Animation([game.getAsset("AFrame.png"),game.getAsset("BFrame.png"),game.getAsset("CFrame.png"),game.getAsset("DFrame.png"),game.getAsset("EFrame.png")],game.getAsset("DFrame.png"),game.getAsset("CFrame.png"),game.getAsset("BFrame.png"),game.getAsset("AFrame.png"), 1)
