@@ -2,6 +2,8 @@ from engine.entity import *
 from engine.vector import *
 from engine.level import *
 from engine.game import *
+from random import randint
+
 
 def tick(deltaTime): #Stuff that happens every frame
     #Movement (Right, left, jump, crouch)
@@ -14,8 +16,11 @@ def tick(deltaTime): #Stuff that happens every frame
     if game.isKeyDown(SDL_SCANCODE_W) and isGrounded() == true:
             player.setVelocity((Vector(0,5))
     if game.isKeyDown(SDL_SCANCODE_S):
-        player.setCollider(Rectangle(0, 150, 200, 150))
-    #Shooting
+        player.setCollider(Rectangle(0, 150, 200, 150)
+    else:
+        player.setCollider(Rectangle(0, 0, 200, 300))
+
+            #Shooting
     gun.setRotation(gun.getPosition().sub(game.getMousePos()).getAngle()) #Constantly points gun at mouse
     if game.isMouseDown(1):
         if gunNumber == 1:
