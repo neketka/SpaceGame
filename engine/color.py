@@ -1,18 +1,18 @@
 class Color:
     def __init__(self, r, g, b, a=1):
-        pass
+        self.r = r
+        self.g = g
+        self.b = b
+        self.a = a
 
     def getR(self):
-        pass
+        return self.r
 
     def getG(self):
-        pass
+        return self.g
 
     def getB(self):
-        pass
+        return self.b
 
     def getA(self):
-        pass
-
-    def mix(self, other, factor):
-        pass
+        return self.a

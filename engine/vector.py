@@ -1,34 +1,38 @@
+import math
+
+
 class Vector:
     def __init__(self, x, y):
-        pass
+        self.x = x
+        self.y = y
 
     def getX(self):
-        pass
+        return self.x
 
     def getY(self):
-        pass
+        return self.y
 
     def getLength(self):
-        pass
+        return math.sqrt(self.x * self.x + self.y * self.y)
 
     def getAngle(self):
-        pass
+        return math.atan2(self.y, self.x)
 
     def mix(self, other, factor):
-        pass
+        return self.mult(1 - factor) + other.mult(factor)
 
     def add(self, other):
-        pass
+        return Vector(self.x + other.x, self.y + other.y)
 
     def sub(self, other):
-        pass
+        return Vector(self.x - other.x, self.y - other.y)
 
     def neg(self):
-        pass
+        return Vector(-self.x, -self.y)
 
     def mult(self, scalar):
-        pass
+        return Vector(self.x * scalar, self.y * scalar)
 
     def normalized(self):
-        pass
+        return self.mult(1 / self.getLength())
     
