@@ -112,3 +112,6 @@ def level0(game):
     level0.addCollider(Rectangle(389, 214, 49, 21))
     level0.addCollider(Rectangle(462, 322, 32, 18))
     level0.addCollider(Rectangle(592, 308, 42, 14))
+
+
+    level0.addCollider(Rectangle(0, 340, 3499, 10)) #Ground
