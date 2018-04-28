@@ -108,4 +108,5 @@ def level0(game):
     level0.addCollider(Rectangle(0, 340, 3499, 10)) #Ground
 
     #Animations
-    enemyWalking = Animation([game.getAsset("AFrame.png"),game.getAsset("BFrame.png"),game.getAsset("CFrame.png"),game.getAsset("DFrame.png"),game.getAsset("EFrame.png")],game.getAsset("DFrame.png"),game.getAsset("CFrame.png"),game.getAsset("BFrame.png"),game.getAsset("AFrame.png"), 1)
+    enemyWalking = Animation([game.getAsset("AFrame.png"),game.getAsset("BFrame.png"),game.getAsset("CFrame.png"),game.getAsset("DFrame.png"),game.getAsset("EFrame.png")],game.getAsset("DFrame.png"),game.getAsset("CFrame.png"),game.getAsset("BFrame.png"), 1)
+    MainCWalking = Animation([game.getAsset("Maincharacter2 - FRAME1.png"),game.getAsset("Maincharacter2 - FRAME2.png"),game.getAsset("Maincharacter2 - FRAME3.png"),game.getAsset("Maincharacter2 - FRAME4.png"),game.getAsset("Maincharacter2 - FRAME5.png"),game.getAsset("Maincharacter2 - FRAME6.png"),game.getAsset("Maincharacter2 - FRAME7.png"),game.getAsset("Maincharacter2 - FRAME8.png"),game.getAsset("Maincharacter2 - FRAME9.png"),game.getAsset("Maincharacter2 - FRAME10.png"),game.getAsset("Maincharacter2 - FRAME11.png"),game.getAsset("Maincharacter2 - FRAME12.png"),game.getAsset("Maincharacter2 - FRAME13.png")])
