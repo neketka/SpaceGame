@@ -64,7 +64,9 @@ def tick(deltaTime): #Stuff that happens every frame
            if enemy1.getVelocity().getX() < 5:
                enemy1.setVelocity(player.getVelocity().add(Vector(1, 0)))
     #MEDKIT
-    if player in regionTest
+    if player in regionTest(Rectangle(medkit1.getPosition().getX(),medkit1.getPosition().getY(),100, 100)):
+        medkit1.kill
+        playerHealth = playerHealth + 25
 
 
 def gui
@@ -99,3 +101,9 @@ def level0(game):
     enemy1.setUserData([10, 0]) #Health, attack timer
     player.addChild(gun)
     enemy1.addChild(enemy1Weapon)
+
+    #Platforms
+    level0.addCollider(Rectangle(84, 266, 77, 25))
+    level0.addCollider(Rectangle(207, 294, 52, 14))
+    level0.addCollider(Rectangle(193, 217, 56, 18))
+    level0.addCollider(Rectangle(280, 179, 60, 24))
