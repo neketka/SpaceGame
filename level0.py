@@ -40,7 +40,7 @@ def tick(deltaTime): #Stuff that happens every frame
     if game.isMouseDown(1) and attackTimer == 0:
         if gunNumber == 1:
             entitiesHit = level0.rayCast(gun.getPosition(), gun.getAngle())
-            entitiesHit[0].kill()
+            entitiesHit[0].setUserData([getUserData[0]-5, getUserData[1]]) #deals 5 damage, doesn't change attack speed
             attackTimer = 60
     #Turning around
     if game.getMousePos().getX() > player.getPosition().getX(): #if mouse on right of player
@@ -48,14 +48,27 @@ def tick(deltaTime): #Stuff that happens every frame
     else:
         player.setFlipX(False) #face left
 
-#GUI
-    canvas.DrawRect(Red, Rectangle(20,20, 20 * playerHealth, 20))
+
 
     #ENEMY AI
     if player in level0.rayCast(enemy1Weapon.getPosition(), enemy1Weapon.getAngle()): #If the enemy is in range of the player
-        if
-            randint(1,4)
+        if enemy1.getUserData()[1] == 0: #If the attack timer = 0, as in he is ready to shoot
+           if randint(1,4) == 1: #1 in 4 change to hit
+               playerHealth = playerHealth - 5
+        enemy1.setUserData([getUserData()[0],100])
+    else: #can't see player
+       if player.getPosition().getX() < enemy1.getPostition().getX(): #If player is on left of enemy
+           if enemy1.getVelocity().getX() > -5:
+               enemy1.setVelocity(enemy1.getVelocity().add(Vector(-1, 0)))
+       else: #player is on the right of the enemy
+           if enemy1.getVelocity().getX() < 5:
+               enemy1.setVelocity(player.getVelocity().add(Vector(1, 0)))
+    #MEDKIT
+    if player in regionTest
 
+
+def gui
+    canvas.DrawRect(Red, Rectangle(20,20, 2 * playerHealth, 20))
 
 
 
@@ -68,10 +81,11 @@ def level0(game):
     player.setPosition(Vector(50,50))
     enemy1 = Entity()
     enemy1Weapon = Entity()
+    medkit1 = Entity()
     global attackTimer
     global playerHealth
-    playerHealth= 10
-    gun= Entity()
+    playerHealth= 100
+    gun = Entity()
 
     level0 = Level()
     level0.setGravity(Vector(0, 2))
@@ -79,7 +93,9 @@ def level0(game):
     level0.setSize(1000, 400)
     level0.setView(view)
     level0.addTickEvent(tick)
+    level0.addGuiDrawEvent(gui)
     level0.addEntity(player)
     level0.addEntity(enemy1)
+    enemy1.setUserData([10, 0]) #Health, attack timer
     player.addChild(gun)
     enemy1.addChild(enemy1Weapon)
