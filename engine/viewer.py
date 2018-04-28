@@ -68,3 +68,6 @@ class Viewer:
 
     def getSize(self):
         return Vector(self.windowW, self.windowH)
+
+    def getScale(self):
+        return self.scale

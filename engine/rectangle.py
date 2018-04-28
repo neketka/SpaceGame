@@ -30,17 +30,17 @@ class Rectangle:
             return None
         if vectorHint is None or vectorHint == Vector(0, 0):
             vectorHint = Vector(0, -1)
-        angle = vectorHint.getAngle()
+        angle = vectorHint.neg().getAngle()
         """
         clip = Rectangle(max(self.x, otherObject.x), max(self.y, otherObject.y),
                          min(self.x + self.width, otherObject.x + otherObject.width) - self.x,
                          min(self.y + self.height, otherObject.y + otherObject.height) - self.y)
         """
-        if 90 < angle <= 270:  # Check left
-            return Vector(self.x - (otherObject.width - max(0, self.x - otherObject.x)), otherObject.y)
-        elif 0 < angle <= 180:  # Check top
-            return Vector(otherObject.y, self.y - (otherObject.height - max(0, self.y - otherObject.y)))
-        elif 180 < angle <= 360:  # Check bottom
-            return Vector(otherObject.x, self.y + self.height)
-        else:  # Check rightd
-            return Vector(self.x + self.width, otherObject.y)
+        if 135 < angle <= 225:  # Check left
+            return Vector(self.x - (otherObject.width - max(0, self.x - otherObject.x)), otherObject.y), 2
+        elif 45 < angle <= 135:  # Check top
+            return Vector(otherObject.y, self.y - (otherObject.height - max(0, self.y - otherObject.y))), 1
+        elif 225 < angle <= 315:  # Check bottom
+            return Vector(otherObject.x, self.y + self.height), 3
+        else:  # Check right
+            return Vector(self.x + self.width, otherObject.y), 0

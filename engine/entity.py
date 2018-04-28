@@ -16,6 +16,7 @@ class Entity:
         self.children = []
         self.userData = None
         self.alive = True
+        self.isGround = False
 
     def setPosition(self, vector):
         self.pos = vector
@@ -58,6 +59,9 @@ class Entity:
     def setLifetime(self, lifetime):
         pass
 
+    def setGrounded(self, grounded):
+        self.isGround = grounded
+
     def kill(self):
         self.alive = False
 
@@ -88,7 +92,8 @@ class Entity:
         corner = point0.mult(self.scale) + Vector(self.collider.x, self.collider.y)
         size = point1 - point0
         """
-        return Rectangle(0, 0, self.collider.width * self.scale, self.collider.height * self.scale)
+        return Rectangle(self.getPosition().getX(), self.getPosition().getY(),
+                         self.collider.width * self.scale, self.collider.height * self.scale)
 
     def doesDieOnImpact(self):
         pass
@@ -106,4 +111,7 @@ class Entity:
 
     def isAlive(self):
         return self.alive
+
+    def isGrounded(self):
+        return self.isGround
 
