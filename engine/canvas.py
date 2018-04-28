@@ -9,7 +9,11 @@ class Canvas:
         self.size = Vector(width, height)
 
     def drawImage(self, image, rectangle):
-        SDL_RenderCopy()
+        SDL_RenderCopy(self.renderer, image.getTexture(), None,
+                       SDL_Rect(int(rectangle.getPosition().getX()),
+                                int(rectangle.getPosition().getY()),
+                                int(rectangle.getSize().getX()),
+                                int(rectangle.getSize().getY())))
 
     def drawRect(self, color, rectangle):
         pass
