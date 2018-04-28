@@ -26,9 +26,11 @@ def tick(deltaTime): #Stuff that happens every frame
                     closestEnemy = hitEnemy
                     closestEnemyDistance = gun.getPosition().sub(hitenemy.getPosition()).getLength()
             closestEnemy.kill
-
-
-
+    #Turning around
+    if game.getMousePos().getX() > player.getPosition().getX(): #if mouse on right of player
+       player.setFlipX(true) #flip = true, so face right
+    else:
+        player.setFlipX(false) #face left
 
 
 def main():
@@ -38,10 +40,9 @@ def main():
     player.setCollider(Rectangle(0, 0, 200, 300))
     view.attachTo(player) #camera follows him
     player.setPosition(Vector(50,50))
+    enemy1 = Entity()
 
-    gunNumber = 1 #1 = pistol,
-    #Gun
-    gun = Entity()
+    gun= Entity()
 
     level0 = Level()
     level0.setGravity(Vector(0, 2))
@@ -50,9 +51,6 @@ def main():
     level0.setView(view)
     level0.addTickEvent(tick)
     level0.addEntity(player)
-    level0.addEntity(enemy)
-
-
+    level0.addEntity(enemy1)
     player.addChild(gun)
-    gun.getPosition().sub(game.getMousePos()).getAngle() #gets angle
     game.run()
