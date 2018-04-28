@@ -5,8 +5,12 @@ from engine.game import *
 from engine.canvas import *
 from engine.rectangle import *
 from engine.animation import *
+from engine.color import *
 
 from enemies.enemy1 import enemy1
+from enemies.enemy2 import enemy2
+from enemies.enemy3 import enemy3
+from enemies.enemy4 import enemy4
 
 
 def tick(deltaTime): #Stuff that happens every frame
@@ -58,16 +62,20 @@ def tick(deltaTime): #Stuff that happens every frame
     enemy4()
     #MEDKIT
     if player in regionTest(Rectangle(medkit1.getPosition().getX(),medkit1.getPosition().getY(),100, 100)):
-        medkit1.kill
+        medkit1.kill()
         playerHealth = playerHealth + 25
 
 
-def gui
-    canvas.DrawRect(Red, Rectangle(20,20, 2 * playerHealth, 20))
+def gui():
+    canvas.DrawRect(Color(1, 0, 0), Rectangle(20,20, 2 * playerHealth, 20))
 
 
 
 def level0(game):
+    global attackTimer
+    global playerHealth
+    global player
+    global view
     view = View()
     canvas = Canvas()
     player = Entity()
@@ -77,8 +85,6 @@ def level0(game):
     enemy1 = Entity()
     enemy1Weapon = Entity()
     medkit1 = Entity()
-    global attackTimer
-    global playerHealth
     playerHealth= 100
     gun = Entity()
 
@@ -136,4 +142,4 @@ def level0(game):
 
     #Animations
     enemyWalking = Animation([game.getAsset("AFrame.png"),game.getAsset("BFrame.png"),game.getAsset("CFrame.png"),game.getAsset("DFrame.png"),game.getAsset("EFrame.png")],game.getAsset("DFrame.png"),game.getAsset("CFrame.png"),game.getAsset("BFrame.png"), 1)
-    MainCWalking = Animation([game.getAsset("Maincharacter2 - FRAME1.png"),game.getAsset("Maincharacter2 - FRAME2.png"),game.getAsset("Maincharacter2 - FRAME3.png"),game.getAsset("Maincharacter2 - FRAME4.png"),game.getAsset("Maincharacter2 - FRAME5.png"),game.getAsset("Maincharacter2 - FRAME6.png"),game.getAsset("Maincharacter2 - FRAME7.png"),game.getAsset("Maincharacter2 - FRAME8.png"),game.getAsset("Maincharacter2 - FRAME9.png"),game.getAsset("Maincharacter2 - FRAME10.png"),game.getAsset("Maincharacter2 - FRAME11.png"),game.getAsset("Maincharacter2 - FRAME12.png"),game.getAsset("Maincharacter2 - FRAME13.png")])
+    MainCWalking = Animation([game.getAsset("Maincharacter2 - FRAME1.png"),game.getAsset("Maincharacter2 - FRAME2.png"),game.getAsset("Maincharacter2 - FRAME3.png"),game.getAsset("Maincharacter2 - FRAME4.png"),game.getAsset("Maincharacter2 - FRAME5.png"),game.getAsset("Maincharacter2 - FRAME6.png"),game.getAsset("Maincharacter2 - FRAME7.png"),game.getAsset("Maincharacter2 - FRAME8.png"),game.getAsset("Maincharacter2 - FRAME9.png"),game.getAsset("Maincharacter2 - FRAME10.png"),game.getAsset("Maincharacter2 - FRAME11.png"),game.getAsset("Maincharacter2 - FRAME12.png"),game.getAsset("Maincharacter2 - FRAME13.png")], 2)
