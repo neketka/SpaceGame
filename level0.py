@@ -40,8 +40,9 @@ def tick(deltaTime): #Stuff that happens every frame
     if game.isMouseDown(1) and attackTimer == 0:
         if gunNumber == 1:
             entitiesHit = level0.rayCast(gun.getPosition(), gun.getAngle())
-            entitiesHit[0].setUserData([getUserData[0]-5, getUserData[1]]) #deals 5 damage, doesn't change attack speed
-            attackTimer = 60
+            if entitiesHit != []:
+                entitiesHit[0].setUserData([getUserData[0]-5, getUserData[1]]) #deals 5 damage, doesn't change attack speed
+                attackTimer = 60
     #Turning around
     if game.getMousePos().getX() > player.getPosition().getX(): #if mouse on right of player
        player.setFlipX(True) #flip = true, so face right
@@ -107,3 +108,7 @@ def level0(game):
     level0.addCollider(Rectangle(207, 294, 52, 14))
     level0.addCollider(Rectangle(193, 217, 56, 18))
     level0.addCollider(Rectangle(280, 179, 60, 24))
+    level0.addCollider(Rectangle(315, 312, 46, 14))
+    level0.addCollider(Rectangle(389, 214, 49, 21))
+    level0.addCollider(Rectangle(462, 322, 32, 18))
+    level0.addCollider(Rectangle(592, 308, 42, 14))
