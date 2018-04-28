@@ -6,11 +6,21 @@ from engine.canvas import *
 from engine.rectangle import *
 from engine.animation import *
 from engine.color import *
+from engine.viewer import *
 
 from enemies.enemy1 import enemy1
 from enemies.enemy2 import enemy2
 from enemies.enemy3 import enemy3
 from enemies.enemy4 import enemy4
+
+attackTimer = None
+playerHealth = None
+player = None
+view = None
+gun = None
+game = None
+croaching = None
+enemy1Weapon = None
 
 
 def tick(deltaTime): #Stuff that happens every frame
@@ -21,11 +31,11 @@ def tick(deltaTime): #Stuff that happens every frame
     if game.isKeyDown(SDL_SCANCODE_A):
         if player.getVelocity().getX() > -5:
             player.setVelocity(player.getVelocity().add(Vector(-1, 0)))
-    if game.isKeyDown(SDL_SCANCODE_W) and isGrounded():
-        player.setVelocity(Vector(0,5))
+    if game.isKeyDown(SDL_SCANCODE_W) and player.isGrounded():
+        player.setVelocity(Vector(0, 5))
     if game.isKeyDown(SDL_SCANCODE_S):
         player.setCollider(Rectangle(0, 0, 200, 150))
-        player.setPosition(player.getPosition().add(Vector(0,-150)))
+        player.setPosition(player.getPosition().add(Vector(0, -150)))
         croaching = 1
     else:
         if croaching == 1:
@@ -46,7 +56,7 @@ def tick(deltaTime): #Stuff that happens every frame
         if gunNumber == 1:
             entitiesHit = level0.rayCast(gun.getPosition(), gun.getAngle())
             if entitiesHit != []:
-                entitiesHit[0].setUserData([getUserData[0]-5, getUserData[1]]) #deals 5 damage, doesn't change attack speed
+                entitiesHit[0].setUserData([entitiesHit[0].getUserData()[0]-5, entitiesHit[0].getUserData[1]]) #deals 5 damage, doesn't change attack speed
                 attackTimer = 60
     #Turning around
     if game.getMousePos().getX() > player.getPosition().getX(): #if mouse on right of player
@@ -61,7 +71,7 @@ def tick(deltaTime): #Stuff that happens every frame
     enemy3()
     enemy4()
     #MEDKIT
-    if player in regionTest(Rectangle(medkit1.getPosition().getX(),medkit1.getPosition().getY(),100, 100)):
+    if player in game.regionTest(Rectangle(medkit1.getPosition().getX(),medkit1.getPosition().getY(),100, 100)):
         medkit1.kill()
         playerHealth = playerHealth + 25
 
@@ -72,24 +82,19 @@ def gui():
 
 
 def level0(game):
-    global attackTimer
-    global playerHealth
-    global player
-    global view
-    view = View()
-    canvas = Canvas()
+    view = Viewer()
     player = Entity()
-    player.setCollider(Rectangle(0, 0, 200, 300))
-    view.attachTo(player) #camera follows him
-    player.setPosition(Vector(50,50))
     enemy1 = Entity()
     enemy1Weapon = Entity()
-    medkit1 = Entity()
-    playerHealth= 100
     gun = Entity()
-
-
     level0 = Level()
+    enemy2 = Entity()
+    player.setCollider(Rectangle(0, 0, 200, 300))
+    view.attachTo(player) #camera follows him
+    player.setPosition(Vector(50, 50))
+    playerHealth= 100
+
+
     level0.setGravity(Vector(0, 2))
     level0.setDrag(0.9)
     level0.setSize(1000, 400)
@@ -104,7 +109,6 @@ def level0(game):
     level0.setBackground(game.getAsset("map2.png"))
 
 
-    enemy2 = Entity()
     enemy2Weapon = Entity()
     level0.addEntity(enemy2)
     enemy2.setUserData([10, 0])  # Health, attack timer
@@ -141,5 +145,5 @@ def level0(game):
     level0.addCollider(Rectangle(0, 340, 3499, 10)) #Ground
 
     #Animations
-    enemyWalking = Animation([game.getAsset("AFrame.png"),game.getAsset("BFrame.png"),game.getAsset("CFrame.png"),game.getAsset("DFrame.png"),game.getAsset("EFrame.png")],game.getAsset("DFrame.png"),game.getAsset("CFrame.png"),game.getAsset("BFrame.png"), 1)
+    enemyWalking = Animation([game.getAsset("AFrame.png"),game.getAsset("BFrame.png"),game.getAsset("CFrame.png"),game.getAsset("DFrame.png"),game.getAsset("EFrame.png"),game.getAsset("DFrame.png"),game.getAsset("CFrame.png"),game.getAsset("BFrame.png")], 1)
     MainCWalking = Animation([game.getAsset("Maincharacter2 - FRAME1.png"),game.getAsset("Maincharacter2 - FRAME2.png"),game.getAsset("Maincharacter2 - FRAME3.png"),game.getAsset("Maincharacter2 - FRAME4.png"),game.getAsset("Maincharacter2 - FRAME5.png"),game.getAsset("Maincharacter2 - FRAME6.png"),game.getAsset("Maincharacter2 - FRAME7.png"),game.getAsset("Maincharacter2 - FRAME8.png"),game.getAsset("Maincharacter2 - FRAME9.png"),game.getAsset("Maincharacter2 - FRAME10.png"),game.getAsset("Maincharacter2 - FRAME11.png"),game.getAsset("Maincharacter2 - FRAME12.png"),game.getAsset("Maincharacter2 - FRAME13.png")], 2)

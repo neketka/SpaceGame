@@ -7,14 +7,14 @@ from engine.rectangle import *
 from engine.animation import *
 from level0 import level0
 
-def tickLevel1:
+def tickLevel1():
     if game.isKeyDown(SDL_SCANCODE_D):
         if player.getVelocity().getX() < 5:
             player.setVelocity(player.getVelocity().add(Vector(1, 0)))
     if game.isKeyDown(SDL_SCANCODE_A):
         if player.getVelocity().getX() > -5:
             player.setVelocity(player.getVelocity().add(Vector(-1, 0)))
-    if game.isKeyDown(SDL_SCANCODE_W) and isGrounded():
+    if game.isKeyDown(SDL_SCANCODE_W) and player.isGrounded():
         player.setVelocity(Vector(0, 5))
     if game.isKeyDown(SDL_SCANCODE_S):
         player.setCollider(Rectangle(0, 0, 200, 150))
