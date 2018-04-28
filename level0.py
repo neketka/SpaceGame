@@ -59,8 +59,7 @@ def tick(deltaTime): #Stuff that happens every frame
 
 
 
-def main():
-    game = Game("Space Game")
+def level0(game):
     view = View()
     canvas = Canvas()
     player = Entity()
@@ -84,4 +83,3 @@ def main():
     level0.addEntity(enemy1)
     player.addChild(gun)
     enemy1.addChild(enemy1Weapon)
-    game.run()
