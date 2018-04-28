@@ -20,10 +20,11 @@ def tick(deltaTime): #Stuff that happens every frame
     if game.isMouseDown(1):
         if gunNumber == 1:
             entitiesHit = level0.rayCast(gun.getPosition(), gun.getAngle()))
-            closestEnemy = 100000000 #just a really big number
+            closestEnemyDistance = 100000000 #just a really big number
             for hitEnemy in entitiesHit:
-                if gun.getPosition().sub(hitenemy.getPosition()).getLength() <  closestEnemy:
-                    closestEnemy = gun.getPosition().sub(hitenemy.getPosition()).getLength()
+                if gun.getPosition().sub(hitenemy.getPosition()).getLength() <  closestEnemyDistance:
+                    closestEnemy = hitEnemy
+                    closestEnemyDistance = gun.getPosition().sub(hitenemy.getPosition()).getLength()
             closestEnemy.kill
 
 
@@ -53,4 +54,5 @@ def main():
 
 
     player.addChild(gun)
-    gun.getPosition().sub(Game.getMousePos()).getAngle() #gets angle
+    gun.getPosition().sub(game.getMousePos()).getAngle() #gets angle
+    game.run()
