@@ -38,7 +38,7 @@ def tick(deltaTime): #Stuff that happens every frame
         attackTimer = attackTimer - 1
 
 
-    if game.isMouseDown(1) and attackTimer == 0:
+    if game.isMouseDown(SDL_BUTTON_LEFT) and attackTimer == 0:
         if gunNumber == 1:
             entitiesHit = level0.rayCast(gun.getPosition(), gun.getAngle())
             if entitiesHit != []:
@@ -53,6 +53,9 @@ def tick(deltaTime): #Stuff that happens every frame
 
     #ENEMY AI
     enemy1()
+    enemy2()
+    enemy3()
+    enemy4()
     #MEDKIT
     if player in regionTest(Rectangle(medkit1.getPosition().getX(),medkit1.getPosition().getY(),100, 100)):
         medkit1.kill
@@ -92,7 +95,31 @@ def level0(game):
     enemy1.setUserData([10, 0]) #Health, attack timer
     player.addChild(gun)
     enemy1.addChild(enemy1Weapon)
-    level0.setBackground(game.getAsset(map2.png))
+    level0.setBackground(game.getAsset("map2.png"))
+
+
+    enemy2 = Entity()
+    enemy2Weapon = Entity()
+    level0.addEntity(enemy2)
+    enemy2.setUserData([10, 0])  # Health, attack timer
+    enemy2.addChild(enemy2Weapon)
+    enemy3 = Entity()
+    enemy3Weapon = Entity()
+    level0.addEntity(enemy3)
+    enemy3.setUserData([10, 0])  # Health, attack timer
+    enemy3.addChild(enemy3Weapon)
+    enemy4 = Entity()
+    enemy4Weapon = Entity()
+    level0.addEntity(enemy4)
+    enemy4.setUserData([10, 0])  # Health, attack timer
+    enemy4.addChild(enemy4Weapon)
+
+#Hitboxes
+    enemy1.setCollider(Rectangle(0, 0, 200, 300))
+    enemy2.setCollider(Rectangle(0, 0, 200, 300))
+    enemy3.setCollider(Rectangle(0, 0, 200, 300))
+    enemy4.setCollider(Rectangle(0, 0, 200, 300))
+
 
     #Platforms
     level0.addCollider(Rectangle(84, 266, 77, 25))

@@ -1,9 +1,9 @@
-from level0 import level0
+from level1 import level1
 
 
 def main():
     game = Game("Space Game")
-    game.level0(game)
+    game.level1(game)
     game.run()
 
 
