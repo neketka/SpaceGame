@@ -3,8 +3,8 @@ import math
 
 class Vector:
     def __init__(self, x, y):
-        self.x = x
-        self.y = y
+        self.x = float(x)
+        self.y = float(y)
 
     def getX(self):
         return self.x
@@ -16,7 +16,7 @@ class Vector:
         return math.sqrt(self.x * self.x + self.y * self.y)
 
     def getAngle(self):
-        return math.atan2(self.y, self.x)
+        return math.atan2(self.y, self.x) * 180 / 3.141592
 
     def mix(self, other, factor):
         return self.mult(1 - factor) + other.mult(factor)

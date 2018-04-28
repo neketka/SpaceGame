@@ -1,15 +1,46 @@
+from engine.vector import *
+
+
 class Rectangle:
     def __init__(self, x, y, width, height):
-        pass
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
 
     def getPosition(self):
-        pass
+        return Vector(self.x, self.y)
 
     def getSize(self):
-        pass
+        return Vector(self.width, self.height)
 
     def getCenter(self):
-        pass
+        return Vector(self.x + self.width / 2, self.y + self.height / 2)
 
-    def getIntersection(self, other):
-        pass
+    def getIntersection(self, otherObject, retBool, vectorHint):
+        overlaps = not (
+            self.x < otherObject.x + otherObject.width or
+            self.x + self.width > otherObject.x or
+            self.y > otherObject.y + otherObject.height or
+            self.y + self.height < otherObject.y
+        )
+        if retBool:
+            return overlaps
+        if not overlaps:
+            return None
+        if vectorHint is None or vectorHint == Vector(0, 0):
+            vectorHint = Vector(0, -1)
+        angle = vectorHint.getAngle()
+        """
+        clip = Rectangle(max(self.x, otherObject.x), max(self.y, otherObject.y),
+                         min(self.x + self.width, otherObject.x + otherObject.width) - self.x,
+                         min(self.y + self.height, otherObject.y + otherObject.height) - self.y)
+        """
+        if 90 < angle <= 270:  # Check left
+            return Vector(self.x - (otherObject.width - max(0, self.x - otherObject.x)), otherObject.y)
+        elif 0 < angle <= 180:  # Check top
+            return Vector(otherObject.y, self.y - (otherObject.height - max(0, self.y - otherObject.y)))
+        elif 180 < angle <= 360:  # Check bottom
+            return Vector(otherObject.x, self.y + self.height)
+        else:  # Check rightd
+            return Vector(self.x + self.width, otherObject.y)

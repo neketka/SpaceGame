@@ -1,82 +1,109 @@
+from engine.vector import *
+from engine.rectangle import *
+
+
 class Entity:
     def __init__(self):
-        pass
+        self.pos = Vector(0, 0)
+        self.velocity = Vector(0, 0)
+        self.rot = 0
+        self.scale = 1
+        self.flipX = False
+        self.flipY = False
+        self.image = None
+        self.isImage = True
+        self.collider = None
+        self.children = []
+        self.userData = None
+        self.alive = True
 
     def setPosition(self, vector):
-        pass
+        self.pos = vector
 
     def setScale(self, factor):
-        pass
+        self.scale = factor
 
     def setRotation(self, angle):
-        pass
+        self.rot = angle
 
     def setFlipX(self, flipX):
-        pass
+        self.flipX = flipX
 
     def setFlipY(self, flipY):
-        pass
+        self.flipY = flipY
 
     def setVelocity(self, vector):
-        pass
+        self.velocity = vector
 
     def setCollider(self, rectangle):
-        pass
+        self.collider = rectangle
 
     def setDieOnImpact(self, dieOnImpact):
         pass
 
     def setImage(self, image):
-        pass
+        self.image = image
+        self.isImage = True
 
     def setAnimation(self, animation):
-        pass
+        self.image = animation
+        self.isImage = False
 
     def addChild(self, child):
-        pass
+        self.children.append(child)
 
     def setUserData(self, data):
-        pass
+        self.userData = data
 
     def setLifetime(self, lifetime):
         pass
 
     def kill(self):
-        pass
+        self.alive = False
 
     def getPosition(self):
-        pass
+        return self.pos
 
     def getScale(self):
-        pass
+        return self.scale
 
     def getRotation(self):
-        pass
+        return self.rot
 
     def getFlipX(self):
-        pass
+        return self.flipX
 
     def getFlipY(self):
-        pass
+        return self.flipY
 
     def getVelocity(self):
-        pass
+        return self.velocity
 
     def getCollider(self):
-        pass
+        if self.collider is None:
+            return None
+        """
+        point0 = Vector(self.collider.x - self.collider.width / 2, self.collider.y - self.collider.height / 2)
+        point1 = point0.add(Vector(self.collider.width, self.collider.height))
+        corner = point0.mult(self.scale) + Vector(self.collider.x, self.collider.y)
+        size = point1 - point0
+        """
+        return Rectangle(0, 0, self.collider.width * self.scale, self.collider.height * self.scale)
 
     def doesDieOnImpact(self):
         pass
 
     def getImage(self):
-        pass
+        if self.isImage:
+            return self.image
+        return self.image.getCurrentFrame()
 
     def getChildren(self):
-        pass
+        return self.children
 
     def getUserData(self):
-        pass
+        return self.userData
 
     def isAlive(self):
-        pass
+        return self.alive
 
